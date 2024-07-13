@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 
 const Navbar1 = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -6,6 +6,18 @@ const Navbar1 = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const navLinks = [
+    { name: "Home", href: "#" },
+    { name: "Service", href: "#" },
+    { name: "About", href: "#" },
+    { name: "Contact", href: "#" },
+    { name: "Blog's", href: "#" },
+  ];
 
   return (
     <nav className="p-5 bg-white shadow md:flex md:items-center md:justify-between">
@@ -21,23 +33,15 @@ const Navbar1 = () => {
           <ion-icon name={menuOpen ? "close" : "menu"}></ion-icon>
         </span>
       </div>
-      <ul className={`md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 ${menuOpen ? 'opacity-100 shadow top-[80px]' : 'opacity-0 top-[-400px]'} transition-all ease-in duration-500`}>
-        <li className="mx-4 my-6 md:my-0">
-          <a href="#" className="text-xl hover:text-cyan-500 duration-500">Home</a>
-        </li>
-        <li className="mx-4 my-6 md:my-0">
-          <a href="#" className="text-xl hover:text-cyan-500 duration-500">Service</a>
-        </li>
-        <li className="mx-4 my-6 md:my-0">
-          <a href="#" className="text-xl hover:text-cyan-500 duration-500">About</a>
-        </li>
-        <li className="mx-4 my-6 md:my-0">
-          <a href="#" className="text-xl hover:text-cyan-500 duration-500">Contact</a>
-        </li>
-        <li className="mx-4 my-6 md:my-0">
-          <a href="#" className="text-xl hover:text-cyan-500 duration-500">Blog&apos;s</a>
-        </li>
-        <button className="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded">
+      <ul className={`md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 ${menuOpen ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'} transition-all ease-in duration-500`}>
+        {navLinks.map((link, index) => (
+          <li key={index} className="mx-4 my-6 md:my-0">
+            <a href={link.href} className="text-xl hover:text-cyan-500 duration-500" onClick={closeMenu}>
+              {link.name}
+            </a>
+          </li>
+        ))}
+        <button className="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded" onClick={closeMenu}>
           Get Started
         </button>
       </ul>
